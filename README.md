@@ -2,9 +2,11 @@
 
 > "Breaking change? I've worked with worse."
 
-**MacGyver** (or just **Mac**) is an intelligent agent that handles Dependabot alerts the right way—not just bumping versions and hoping for the best, but actually verifying changes work and fixing what breaks.
+**MacGyver** (or just **Mac**) is an intelligent agent that handles Dependabot alerts and GitHub CodeQL code scanning alerts the right way—not just bumping versions or flagging issues, but actually verifying changes work and fixing what breaks.
 
 ## What MacGyver Does
+
+### Dependabot Alerts
 
 Unlike standard Dependabot which simply proposes version bumps, MacGyver:
 
@@ -13,6 +15,22 @@ Unlike standard Dependabot which simply proposes version bumps, MacGyver:
 3. **Builds the application** to catch compile-time issues
 4. **Fixes breaking changes** when upgrades cause failures
 5. **Updates the PR** with working code, not just version numbers
+
+### CodeQL Code Scanning Alerts
+
+MacGyver also monitors GitHub's CodeQL code scanning alerts and takes action:
+
+1. **Triages CodeQL alerts** to understand severity and impact
+2. **Analyzes the flagged code** to determine the root cause
+3. **Implements fixes** that address the underlying issue, not just silence the alert
+4. **Verifies the fix** by running tests and ensuring the alert is resolved
+5. **Opens a PR** with a clear explanation of what was found and how it was fixed
+
+CodeQL catches issues like:
+- Potential security vulnerabilities
+- Code quality problems
+- Bug-prone patterns
+- Performance anti-patterns
 
 ## The Name & Personality
 
@@ -39,9 +57,17 @@ This perfectly captures what this agent does: when a major version bump breaks t
 
 ## Philosophy
 
-The standard approach to dependency management is passive: Dependabot opens a PR, CI fails, and the PR sits there until a human investigates. This creates alert fatigue and security debt.
+The standard approach to security alerts is passive: Dependabot opens a PR that fails CI, CodeQL flags an issue in a dashboard, and both sit there until a human investigates. This creates alert fatigue and security debt.
 
-MacGyver takes an active approach. Like the TV character who never waited for backup, this agent takes ownership of the problem end-to-end. It's not enough to identify that an upgrade is available—the job isn't done until the upgrade is safely merged.
+MacGyver takes an active approach. Like the TV character who never waited for backup, this agent takes ownership of the problem end-to-end. It's not enough to identify that an upgrade is available or that code has a potential issue—the job isn't done until the fix is safely merged.
+
+## Relationship with Elliot
+
+MacGyver handles **automated security tooling alerts**—Dependabot for dependency vulnerabilities and CodeQL for code scanning issues flagged by GitHub's analysis.
+
+[Elliot](https://github.com/phystack/agent-elliot) performs **deep, original analysis** of your codebase—finding vulnerabilities that automated tools miss by thinking like an attacker.
+
+Together, they ensure both automated alerts get actioned *and* your code gets the thorough security review it deserves.
 
 ## License
 
