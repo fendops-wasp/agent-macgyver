@@ -65,7 +65,7 @@ MacGyver takes an active approach. Like the TV character who never waited for ba
 
 MacGyver handles **automated security tooling alerts**—Dependabot for dependency vulnerabilities and CodeQL for code scanning issues flagged by GitHub's analysis.
 
-[Elliot](https://github.com/phystack/agent-elliot) performs **deep, original analysis** of your codebase—finding vulnerabilities that automated tools miss by thinking like an attacker.
+[Elliot](https://github.com/fendops-wasp/agent-elliot) performs **deep, original analysis** of your codebase—finding vulnerabilities that automated tools miss by thinking like an attacker.
 
 Together, they ensure both automated alerts get actioned *and* your code gets the thorough security review it deserves.
 
