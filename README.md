@@ -69,6 +69,27 @@ MacGyver handles **automated security tooling alerts**—Dependabot for dependen
 
 Together, they ensure both automated alerts get actioned *and* your code gets the thorough security review it deserves.
 
+## Infrastructure
+
+MacGyver runs in the `agents` namespace on Kubernetes with isolated access to shared infrastructure:
+
+### PostgreSQL
+- **Database:** `agent_macgyver` (isolated)
+- **User:** `agent_macgyver_user` (restricted to own database)
+- **Isolation:** Database-level with `REVOKE` on other databases
+
+### Qdrant
+- **Instance:** `qdrant-agent-macgyver.agents.svc.cluster.local` (dedicated)
+- **Isolation:** Instance-level with unique API key
+- **Purpose:** Vector storage for embeddings and semantic search
+
+### Redis
+- **Instance:** Shared cluster
+- **Key prefix:** `agent-macgyver:`
+- **Isolation:** Key prefix convention
+
+This isolation ensures MacGyver cannot access data from other agents and vice versa.
+
 ## License
 
 MIT
